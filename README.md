@@ -31,8 +31,10 @@ Things you may want to cover:
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
-| full_name          | string | null: false               |
-| full_name_kana     | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
 | birth_date         | date   | null: false               |
 
 
@@ -44,16 +46,16 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column       | Type    | Options     |
-| ------------ | -------- ------------ |
-| item_name    | string  | null: false |
-| category_id  | integer | null: false |
-| price        | integer | null: false |
-| seller_id    | integer | null: false |
-| condition     | string |             |
-| shipping_fee  | string |             |
-| shipping_area | string |             |
-| shipping_date | string |             |
+| Column           | Type    | Options                        |
+| ---------------- | -------- ------------------------------- |
+| item_name        | string  | null: false                    |
+| description      | text    |                                |
+| category_id      | integer | null: false, foreign_key: true |
+| price            | integer | null: false                    |
+| condition_id     | integer | null: false, foreign_key: true | 
+| shipping_fee_id  | integer | null: false, foreign_key: true | 
+| shipping_area_id | integer | null: false, foreign_key: true | 
+| shipping_date_id | integer | null: false, foreign_key: true | 
 
 
 ### Association
@@ -64,30 +66,30 @@ Things you may want to cover:
 
 ## buyers テーブル
 
-| Column  | Type       | Options                       |
-| --------| ---------- | ----------------------------- |
-| user    | references | null: false,foreign_key: true |
-| item    | references | null: false,foreign_key: true |
+| Column  | Type       | Options                        |
+| --------| ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one :shipping_addresses
+- has_one :shipping_address
 
 
 ## shipping_addresses テーブル
 
-| Column         | Type    | Options      |
-| -------------- | ------- | ------------ |
-| postal_code    | string  | null: false  |
-| prefecture     | integer | null: false  |
-| city           | string  | null: false  |
-| house_number   | string  | null: false  |
-| building_name  | string  |  
-| phone_number   | string  | null: false  |
+| Column         | Type    | Options                        |
+| -------------- | ------- | ------------------------------ |
+| postal_code    | string  | null: false, foreign_key: true |
+| prefecture_id  | integer | null: false, foreign_key: true | 
+| city           | string  | null: false, foreign_key: true |
+| house_number   | string  | null: false, foreign_key: true |
+| building_name  | string  | null: false, foreign_key: true | 
+| phone_number   | string  | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :buyers
+- belongs_to :buyer
