@@ -1,11 +1,19 @@
 require 'rails_helper'
 RSpec.describe User, type: :model do
-  before do
-    @user = FactoryBot.build(:user)
-  end
-
+  
   describe 'ユーザー新規登録' do
 
+   before do
+    @user = FactoryBot.build(:user)
+   end
+
+    context '内容に問題ない場合' do
+      it 'すべての情報があれば登録できる' do
+        expect(@user).to be_valid
+      end
+    end
+
+    context '内容に問題がある場合' do
     it 'nicknameが空では登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -25,7 +33,25 @@ RSpec.describe User, type: :model do
     end
 
     it "passwordが英数字混合でないと登録できない" do
-      @user.password = '123456' 
+      @user.password = '1111111' 
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password must be a combination of letters and numbers"
+    end
+
+    it "passwordが英字のみでは登録できない" do
+      @user.password = 'aaaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password must be a combination of letters and numbers"
+    end
+
+    it "passwordが数字のみでは登録できない" do
+      @user.password = '0000000'
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password must be a combination of letters and numbers"
+    end
+
+    it "passwordが全角文字を含む場合は登録できない" do
+      @user.password = 'aaa０00' 
       @user.valid?
       expect(@user.errors.full_messages).to include "Password must be a combination of letters and numbers"
     end
@@ -90,6 +116,8 @@ RSpec.describe User, type: :model do
       @user.birth_date = ''  
       @user.valid?
       expect(@user.errors.full_messages).to include "Birth date can't be blank"
+    end
+
     end
 
   end
