@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @items = Item.all
+    @item = Item.new
+    @user = User.find(params[:user_id])
+    @items = @user.items.includes(:user)
   end
 
   
@@ -11,19 +13,24 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    
+    @user = User.find(params[:user_id])
+    @item = @user.item.new(item_params)
   
     if @item.save
-      redirect_to items_path
+
+      redirect_to user_items_path(@user)
     else
+      @items = @user.items.includes(:user)
       render :new
     end
+    
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:user, :item_name, :description, :category_id, :condition_id, :shippig_fee_id, :prefecture_id, :shipping_date_id, :price)
+    params.require(:item).permit(:content).merge(user_id: current_user.id)
   end
 
 end

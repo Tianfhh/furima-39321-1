@@ -5,4 +5,7 @@ Rails.application.routes.draw do
 
   resources :items, only: [:new, :create, :index]
 
+
+
+
 end
