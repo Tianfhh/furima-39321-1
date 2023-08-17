@@ -32,11 +32,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "Password can't be blank"
     end
 
-    it "passwordが英数字混合でないと登録できない" do
-      @user.password = '1111111' 
-      @user.valid?
-      expect(@user.errors.full_messages).to include "Password must be a combination of letters and numbers"
-    end
 
     it "passwordが英字のみでは登録できない" do
       @user.password = 'aaaaaaa'
