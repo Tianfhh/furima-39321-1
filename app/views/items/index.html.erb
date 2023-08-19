@@ -147,19 +147,20 @@
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
-            <%= item.item_name %>
+            <%= "商品名" %>
           </h3>
           <div class='item-price'>
-            <span><%= item.price %>円<br><%= item.shipping_fee.name %></span>
+            <span><%= "販売価格" %>円<br><%= '配送料負担' %></span></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
-              <span class='star-count'><%= item.price %></span>
+              <span class='star-count'>0</span>
             </div>
           </div>
         </div>
         <% end %>
       </li>
-      <% end %>
+      
+      <%# end %>
 
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       <%# 商品がある場合は表示されないようにしましょう %>
