@@ -9,8 +9,8 @@ window.addEventListener('load', () => {
   const salesFee = Math.floor(price * 0.1) || 0; 
   const profit = Math.floor(price - salesFee); 
 
-  salesFeeDisplay.textContent = salesFee ? `${salesFee.toLocaleString()}円` : "";
-  profitDisplay.textContent = profit ? `${profit.toLocaleString()}円` : "";
+  salesFeeDisplay.textContent = salesFee ? `${salesFee.toLocaleString()}` : "";
+  profitDisplay.textContent = profit ? `${profit.toLocaleString()}` : "";
 });
 
 })
