@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   resources :buyers, only:[:create]
  
-
+  resources :items, only: [:show] do
+    resources :buyers, only: [:new, :create]
+  end
   
 
   
