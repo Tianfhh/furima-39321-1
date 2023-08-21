@@ -1,6 +1,6 @@
 class BuyersController < ApplicationController
 
-  def index
+  def new
     @buyer = Buyer.new
   end
 
