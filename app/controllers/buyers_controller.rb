@@ -8,19 +8,29 @@ class BuyersController < ApplicationController
   end
 
   def create
-    @buyer = Buyer.create(buyer_params)
-    ShippingAddress.create(shipping_address_params)
-    redirect_to root_path
-    
+    @buyer = Buyer.new(buyer_params)
+    if @buyer.valid?
+      pay_item
+      @buyer.save
+      return redirect_to root_path
+    else
+      render 'index'
+    end
   end
 
   private
 
   def buyer_params
-    params.permit(:price).merge(user_id: current_user.id)
+    params.require(:buyer).permit(:price).merge(token: params[:token])
   end
 
-  def shipping_address_params
-    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(buyer_id: @buyer.id)
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
+    Payjp::Charge.create(
+      amount: buyer_params[:price],
+      card: buyer_params[:token],
+      currency: 'jpy'
+    )
   end
+
 end
