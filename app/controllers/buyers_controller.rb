@@ -1,5 +1,7 @@
 class BuyersController < ApplicationController
-
+  before_action :authenticate_user!
+  
+  
   def new
     @buyer = Buyer.new
     @item = Item.find(params[:item_id])

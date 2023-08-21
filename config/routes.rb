@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   
   resources :items, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
-  resources :buyers, only:[:create]
+  resources :buyers, only:[:new, :create]
  
   resources :items, only: [:show] do
     resources :buyers, only: [:new, :create]
