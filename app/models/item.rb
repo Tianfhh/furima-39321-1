@@ -20,7 +20,9 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_date
 
-
+  def sold_out?
+    buyer.present?
+  end
 
 
   has_one_attached :image
