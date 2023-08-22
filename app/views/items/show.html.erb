@@ -10,11 +10,11 @@
       <%= image_tag @item.image ,class:"item-box-img" %>
 
 
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      <% if @item.sold_out? %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <% end %>
 
 
     </div>
