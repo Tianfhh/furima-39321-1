@@ -5,6 +5,17 @@ class BuyersController < ApplicationController
   def new
     @buyer_shipping_address = BuyerShippingAddress.new
     @item = Item.find(params[:item_id])
+    if user_signed_in?
+      if @item.user == current_user
+        redirect_to root_path
+      elsif @item.sold_out?
+        redirect_to root_path
+      else
+        @buyer_shipping_address = BuyerShippingAddress.new
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
