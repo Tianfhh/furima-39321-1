@@ -62,11 +62,15 @@ RSpec.describe BuyerShippingAddress, type: :model do
       @buyer_shipping_address.phone_number = '123456789'
       @buyer_shipping_address.valid?
       expect(@buyer_shipping_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only 10 or 11 digits.")
-      
+    end
+
+    it 'phone_numberが10桁または11桁の数字でないと保存できないこと' do
       @buyer_shipping_address.phone_number = '123456789012'
       @buyer_shipping_address.valid?
       expect(@buyer_shipping_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only 10 or 11 digits.")
-    
+    end
+
+    it 'phone_numberが10桁または11桁の数字でないと保存できないこと' do
       @buyer_shipping_address.phone_number = 'a1234567890'
       @buyer_shipping_address.valid?
       expect(@buyer_shipping_address.errors.full_messages).to include("Phone number Phone number is invalid. Input only 10 or 11 digits.")
