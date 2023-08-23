@@ -4,7 +4,6 @@ class BuyersController < ApplicationController
   
   def new
     @buyer_shipping_address = BuyerShippingAddress.new
-    if user_signed_in?
       if @item.user == current_user || @item.sold_out?
         redirect_to root_path
       end
