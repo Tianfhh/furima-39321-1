@@ -1,10 +1,9 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :find_item, only: [:new, :create]
   
   def new
     @buyer_shipping_address = BuyerShippingAddress.new
-    @item = Item.find(params[:item_id])
     if user_signed_in?
       if @item.user == current_user
         redirect_to root_path
@@ -19,8 +18,6 @@ class BuyersController < ApplicationController
   end
 
   def create
-    # binding.pry
-    @item = Item.find(params[:item_id])
     @buyer_shipping_address = BuyerShippingAddress.new(buyer_params)
     if @buyer_shipping_address.valid?
       pay_item
@@ -35,6 +32,10 @@ class BuyersController < ApplicationController
 
   def buyer_params
     params.require(:buyer_shipping_address).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :token).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
+  end
+
+  def find_item
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
