@@ -95,5 +95,7 @@ RSpec.describe BuyerShippingAddress, type: :model do
     end
 
    end
+
   end
+  
 end
