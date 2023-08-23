@@ -29,7 +29,7 @@ const pay = () => {
       cvcElement.clear();
       document.getElementById("charge-form").submit();
     });
-  });
+  }); 
 };
 
 window.addEventListener("load", pay);

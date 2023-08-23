@@ -22,12 +22,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-  
+    @user = current_user if user_signed_in?
   end
 
   def edit
     
-    if user_signed_in? && @item.user == current_user
+    if user_signed_in? && @item.user == current_user && !@item.sold_out?
      
     else
       redirect_to root_path
