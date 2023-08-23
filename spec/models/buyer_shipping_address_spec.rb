@@ -5,7 +5,7 @@ RSpec.describe BuyerShippingAddress, type: :model do
    before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @buyer_shipping_address = FactoryBot.build(:buyer_shipping_address, user_id: @user.id, item_id: @item.id, token: Faker::Alphanumeric.alphanumeric(number: 16))
+    @buyer_shipping_address = FactoryBot.build(:buyer_shipping_address, user_id: @user.id, item_id: @item.id)
    end
 
    context '内容に問題ない場合' do
