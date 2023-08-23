@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
 
-  
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :category_id, presence: true, numericality: { other_than: 1 } 
@@ -23,7 +22,6 @@ class Item < ApplicationRecord
   def sold_out?
     buyer.present?
   end
-
 
   has_one_attached :image
 
