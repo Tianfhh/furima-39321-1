@@ -5,6 +5,7 @@ FactoryBot.define do
     prefecture_id { 1 }
     city          { '東京都' }
     house_number  { '1-2-3' }
+    building_name { 'ハイツ' }
     phone_number  { '09012345678' }
     token { Faker::Alphanumeric.alphanumeric(number: 16) }
 

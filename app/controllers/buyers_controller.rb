@@ -8,9 +8,6 @@ class BuyersController < ApplicationController
       if @item.user == current_user || @item.sold_out?
         redirect_to root_path
       end
-    else
-      redirect_to new_user_session_path
-    end
   end
 
   def create
